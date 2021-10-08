@@ -53,6 +53,8 @@ function randomColors() {
 
         colorizeSliders(color,hue,brightness,saturation);
     });
+//reset inputs
+    resetInputs();
 }
 
 function checkTextContrast(color,text){
@@ -109,5 +111,18 @@ function updateTextUI(index) {
         checkTextContrast(color, icon);
     }
 }
+
+function resetInputs() {
+    colorDivs.forEach((div, i) => {
+      const color = initialColors[i],
+        hueValue = chroma(color).hsl()[0],
+        satValue = chroma(color).hsl()[1],
+        brightValue = chroma(color).hsl()[2];
+      sliders[0 + 3 * i].value = Math.floor(hueValue);
+      sliders[1 + 3 * i].value = Math.floor(brightValue * 100) / 100;
+       sliders[2 + 3 * i].value = Math.floor(satValue * 100) / 100;
+  
+    });
+  }
 
 randomColors();
